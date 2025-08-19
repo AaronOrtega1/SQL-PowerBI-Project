@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: pizza_postgres
+    environment:
+      POSTGRES_DB: pizza_db
+      POSTGRES_USER: pizza_user
+      POSTGRES_PASSWORD: pizza_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./data/pizza_sales.csv:/tmp/pizza_sales.csv
+
+volumes:
+  postgres_data:
